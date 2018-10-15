@@ -62,8 +62,9 @@ def run_hashcat(algo_num, attack_mode, history_to_skip):
     log_command("starting: " + command)
 
     try:
-        out, err = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()
-        return_value = p.wait()
+        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out, err = process.communicate()
+        return_value = process.wait()
         output = "\n".join([ line.decode('UTF-8') for line in out.splitlines() ])
 
         log_command("return value: {0}\ncommand output:\n {1}\n".format(return_value, output))
