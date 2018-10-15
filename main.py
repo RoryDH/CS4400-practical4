@@ -7,7 +7,7 @@ import subprocess
 HASHCAT_COMMANDS = "hashcat_commands.txt"
 
 try:
-    PUSH_MORE_TOKEN = open("push_more_tokena.txt", "r").read().strip()
+    PUSH_MORE_TOKEN = open("push_more_token.txt", "r").read().strip()
 except FileNotFoundError as e:
     PUSH_MORE_TOKEN = None
     print("no push_more_token.txt => no telegram notifications")
