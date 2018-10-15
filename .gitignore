@@ -1,0 +1,7 @@
+hashcat
+hashcat_history.txt
+*.broken
+hughesr8.hashes
+*.pem
+push_more_token.txt
+rockyou.txt

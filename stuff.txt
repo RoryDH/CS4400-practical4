@@ -1,0 +1,4 @@
+.\hashcat64.exe -m 500 -O .\hash.txt .\Wordlists
+
+
+./hashcat -m 500 -O r500.hashes rockyou.txt
