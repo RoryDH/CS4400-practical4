@@ -61,8 +61,6 @@ def run_hashcat(algo_num, attack_mode, history_to_skip):
 
     log_command("starting: " + command)
 
-    return command
-
     try:
         out, err = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()
         return_value = p.wait()
