@@ -5,8 +5,13 @@ import datetime
 import subprocess
 
 HASHCAT_EXECUTABLE = "./hashcat"
-PUSH_MORE_TOKEN = open("push_more_token.txt", "r").read().strip()
 HISTORY_FILE_NAME = "hashcat_history.txt"
+
+try:
+    PUSH_MORE_TOKEN = open("push_more_tokena.txt", "r").read().strip()
+except FileNotFoundError as e:
+    PUSH_MORE_TOKEN = None
+    print("no push_more_token.txt => no telegram notifications")
 
 ALGO_NUMS = [
     "500", # md5
@@ -37,7 +42,8 @@ def log_command(msg):
     print("\n====== sending via webhook ({0} UTC) ======\n".format(str(datetime.datetime.now())))
     print(msg)
 
-    message_telegram(msg)
+    if PUSH_MORE_TOKEN:
+        message_telegram(msg)
 
     print("\n")
 
@@ -50,10 +56,12 @@ def run_hashcat(algo_num, attack_mode, history_to_skip):
     )
 
     if command in history_to_skip:
-        print("in history: " + command)
+        print("in history: " + command + " SKIPPING\n")
         return command
 
     log_command("starting: " + command)
+
+    return command
 
     try:
         out, err = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()
@@ -68,7 +76,11 @@ def run_hashcat(algo_num, attack_mode, history_to_skip):
 
 
 def main():
-    commands_history = open(HISTORY_FILE_NAME, "r").read().strip().split("\n")
+    try:
+        commands_history = open(HISTORY_FILE_NAME, "r").read().strip().split("\n")
+    except FileNotFoundError as e:
+        commands_history = []
+
     commands_run = []
 
     for num in ALGO_NUMS:
