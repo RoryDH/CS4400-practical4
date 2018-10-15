@@ -1,0 +1,4 @@
+hashcat -m 500 -a 1 500.hashes 44.txt -w 3 —force -O
+hashcat -m 1500 -a 1 1500.hashes 44.txt -w 3 —force -O
+hashcat -m 1800 -a 1 1800.hashes 44.txt -w 3 —force -O
+hashcat -m 7400 -a 1 7400.hashes 44.txt -w 3 —force -O
