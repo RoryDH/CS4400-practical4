@@ -45,7 +45,7 @@ def run_command(command):
 
 def main():
     try:
-        commands = open(HISTORY_FILE_NAME, "r").read().strip().split("\n")
+        commands = open(HASHCAT_COMMANDS, "r").read().strip().split("\n")
     except FileNotFoundError as e:
         print("no commands file named " + HASHCAT_COMMANDS)
         return 1
